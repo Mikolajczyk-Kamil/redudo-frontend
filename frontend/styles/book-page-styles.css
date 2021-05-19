@@ -1,0 +1,104 @@
+@media only screen and (max-width: 768px) {
+
+    .bookBox {
+        padding: 1%;
+    }
+
+    .bookImage {
+        max-width: 100%;
+    }
+}
+
+@media only screen and (min-width: 769px) {
+
+    .pageTop {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .bookBox {
+        padding: 2%;
+        border-radius: 10px;
+    }
+
+    .bookImage {
+        max-width: 300px;
+    }
+}
+
+.bookData {
+    padding: 10px;
+}
+
+.bookAuthor {
+    font-weight: initial;
+    font-style: italic;
+}
+
+.bookTitle {
+    font-weight: bold;
+}
+
+.bookDescriptionDiv {
+    color: black;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.pageTop {
+    padding: 10px;
+    margin: 10px;
+}
+
+.pageBottom {
+    color: black;
+    background-color: rgba(255,255,255, 0.1);
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.buttonAddComment {
+    color: black;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.commentContainer {
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.bookImage {
+    border-radius: 10px;
+}
+
+.commentImage {
+    border-radius: 50%;
+    max-width: 50px;
+}
+
+.commentBox {
+    display: flex;
+    flex-direction: column;
+}
+
+.commentTop {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+}
+
+.commentName {
+    padding-left: 5px;
+    padding-right: 4px;
+}
+
+.commentBottom {
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 5px;
+}
