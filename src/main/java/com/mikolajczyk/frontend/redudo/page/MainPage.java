@@ -4,25 +4,32 @@ import com.mikolajczyk.frontend.redudo.page.mainPageContent.PagesContentManager;
 import com.mikolajczyk.frontend.redudo.session.Session;
 import com.mikolajczyk.frontend.redudo.source.service.SourceAccountService;
 import com.vaadin.flow.component.Key;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dependency.JsModule;
-import com.vaadin.flow.component.html.Anchor;
-import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.Header;
-import com.vaadin.flow.component.html.Image;
+import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.page.Meta;
 import com.vaadin.flow.component.page.Viewport;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
+import com.vaadin.flow.dom.ThemeList;
 import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.PreserveOnRefresh;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.PWA;
 import com.vaadin.flow.server.VaadinSession;
 import com.vaadin.flow.server.WebBrowser;
+import com.vaadin.flow.theme.NoTheme;
+import com.vaadin.flow.theme.Theme;
+import com.vaadin.flow.theme.lumo.Lumo;
+import com.vaadin.flow.theme.lumo.LumoThemeDefinition;
+import com.vaadin.flow.theme.material.Material;
 
 import javax.annotation.PostConstruct;
 import java.util.HashMap;
@@ -34,31 +41,34 @@ import java.util.Map;
 @Meta(name = "mobile-web-app-capable", content = "yes")
 @Meta(name = "apple-mobile-web-app-capable", content = "yes")
 @Meta(name = "apple-mobile-web-app-status-bar-style", content = "black-translucent")
-@PWA(name = "Redudo", shortName = "Redudo", iconPath = "icons/logo-128x128.png")
-@CssImport(value = "./styles/app-layout-styles.css", themeFor = "vaadin-app-layout")
+@PWA(name = "Redudo", shortName = "Redudo")
 @CssImport(value = "./styles/book-page-styles.css")
-@CssImport(value = "./styles/styles.css")
+@CssImport(value = "./styles/max-800px-styles.css")
+@CssImport(value = "./styles/min-800px-max-1920px-styles.css")
+@CssImport(value = "./styles/min-1921px-styles.css")
+@CssImport(value = "./styles/general-styles.css")
 @JsModule("./scripts/script.js")
+@PreserveOnRefresh
 public class MainPage extends AppLayout {
 
     private final Session session;
     private final SourceAccountService sourceAccountService;
     private final PagesContentManager contentManager;
-    private Div pages;
+    private Div pagesInContainer;
 
     public MainPage(Session session, SourceAccountService sourceAccountService, PagesContentManager contentManager) {
         this.session = session;
         this.sourceAccountService = sourceAccountService;
         this.contentManager = contentManager;
-        sourceAccountService.singIn();
     }
 
     @PostConstruct
     public void init() {
+        sourceAccountService.singIn();
         Tabs tabs = prepareMenu();
-        pages = prepareContent();
-        prepareTabsToPages(tabs, pages);
-        setContent(pages);
+        pagesInContainer = prepareContent();
+        prepareTabsToPages(tabs, pagesInContainer);
+        setContent(pagesInContainer);
     }
 
     public Tabs prepareMenu() {
@@ -77,19 +87,52 @@ public class MainPage extends AppLayout {
         Tabs tabs = new Tabs(menuMain, menuToRead, menuDuring, menuDone, menuSignOut);
         tabs.setOrientation(Tabs.Orientation.VERTICAL);
         setPrimarySection(Section.DRAWER);
-        addToNavbar(true, new DrawerToggle(), prepareSearchField(tabs));
-        addToDrawer(menuTop, tabs);
+        DrawerToggle drawerToggle = new DrawerToggle();
+        Div drawerContainer = new Div();
+        drawerContainer.setClassName("drawer");
+        drawerToggle.addClickListener(e -> {
+            if (isDrawerOpened())
+                drawerContainer.getClassNames().remove("hide");
+            else
+                drawerContainer.addClassName("hide");
+        });
+        Button themeSwitch = new Button("Dark mode");
+        themeSwitch.setClassName("themeSwitchButton");
+        themeSwitch.addClickListener(e -> {
+            ThemeList themeList = UI.getCurrent().getElement().getThemeList();
+            if (themeList.contains(Lumo.DARK)) {
+                themeSwitch.setText("Dark mode");
+                drawerContainer.removeClassName("darkMode");
+                pagesInContainer.removeClassName("darkMode");
+                themeList.remove(Lumo.DARK);
+            }
+            else {
+                themeSwitch.setText("Light mode");
+                drawerContainer.addClassName("darkMode");
+                pagesInContainer.addClassName("darkMode");
+                themeList.add(Lumo.DARK);
+            }
+        });
+        Paragraph paragraph = new Paragraph("Redudo™");
+        paragraph.setClassName("menuFooterParagraph");
+        Div menuFooter = new Div(paragraph, themeSwitch);
+        menuFooter.setClassName("menuFooter");
+        drawerContainer.add(menuTop, tabs, menuFooter);
+        Div navbarContainer = new Div(drawerToggle, prepareSearchField(tabs));
+        navbarContainer.setClassName("navbarContainer");
+        addToDrawer(drawerContainer);
+        addToNavbar(navbarContainer);
         return tabs;
     }
 
     private TextField prepareSearchField(Tabs tabs) {
         TextField searchField = new TextField();
         searchField.setClassName("searchField");
-        searchField.setPlaceholder("Search books...");
+        searchField.setPlaceholder("Search...");
         searchField.setClearButtonVisible(true);
         searchField.addKeyDownListener(Key.ENTER, e -> {
             if (tabs.getSelectedTab().equals(tabs.getComponentAt(0)))
-                contentManager.mainSearchField(searchField, (Div) pages.getComponentAt(0));
+                contentManager.mainSearchField(searchField, (Div) pagesInContainer.getComponentAt(0));
         });
         searchField.setValueChangeMode(ValueChangeMode.EAGER);
         searchField.addValueChangeListener(e -> {

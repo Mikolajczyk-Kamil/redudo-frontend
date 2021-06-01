@@ -1,0 +1,34 @@
+@media only screen and (max-width: 800px) {
+
+    .searchField {
+        width: 80%;
+    }
+
+    .twoItemsContainer {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+    }
+
+    .item {
+        padding: 1%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    .singleItemContainer {
+        background-color: rgba(255, 255, 255, 0.4);
+        border-radius: 10px 10px 10px 10px;
+        box-shadow: 1px 1px 4px black;
+    }
+
+    .singleItem {
+        padding: 2%;
+    }
+
+    .singleItem img {
+        border-radius: 10px;
+    }
+}

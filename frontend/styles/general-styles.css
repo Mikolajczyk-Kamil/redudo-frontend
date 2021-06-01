@@ -1,0 +1,94 @@
+body {
+    background: linear-gradient(10deg, rgba(21,117,204,1) 0%, rgba(131,110,173,1) 100%);
+}
+
+.drawer {
+    background-color: rgba(255, 255, 255, 0.5);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.navbarContainer {
+    width: 100%;
+}
+
+.menuTop {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    padding: 20px;
+}
+
+.menuTop img {
+    width: 25%;
+    margin-right: 10%;
+    border-radius: 45%;
+}
+
+.pages {
+    background-color: rgba(255, 255, 255, 0.3);
+    padding: 10px;
+    margin: 10px;
+    border-radius: 4px;
+}
+
+.page {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: stretch;
+    height: 100%;
+}
+
+.item {
+    cursor: pointer;
+    float: left;
+    width: 50%;
+    margin: 1%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+
+.itemDeleted {
+    display: none;
+}
+
+.itemImage {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.itemData {
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 5px;
+}
+
+.itemTitle {
+    font-weight: bold;
+}
+
+.itemAuthor {
+    font-style: italic;
+    font-weight: lighter;
+}
+
+.menuFooter {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    font-size: 12px;
+}
+
+.darkMode {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.darkMode .item, .darkMode .singleItem .itemData {
+    background-color: rgba(0, 0, 0, 0.2);
+}

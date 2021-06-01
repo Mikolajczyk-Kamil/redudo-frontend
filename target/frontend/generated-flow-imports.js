@@ -7,12 +7,18 @@ function addCssBlock(block) {
  tpl.innerHTML = block;
  document.head.appendChild(tpl.content);
 }
-import $css_0 from 'Frontend/styles/app-layout-styles.css';
-addCssBlock(`<dom-module id="flow_css_mod_0" theme-for="vaadin-app-layout"><template><style>${$css_0}</style></template></dom-module>`);
+import $css_0 from 'Frontend/styles/login-page-styles.css';
+addCssBlock(`<custom-style><style>${$css_0}</style></custom-style>`);
 import $css_1 from 'Frontend/styles/book-page-styles.css';
 addCssBlock(`<custom-style><style>${$css_1}</style></custom-style>`);
-import $css_2 from 'Frontend/styles/styles.css';
+import $css_2 from 'Frontend/styles/max-800px-styles.css';
 addCssBlock(`<custom-style><style>${$css_2}</style></custom-style>`);
+import $css_3 from 'Frontend/styles/min-800px-max-1920px-styles.css';
+addCssBlock(`<custom-style><style>${$css_3}</style></custom-style>`);
+import $css_4 from 'Frontend/styles/min-1921px-styles.css';
+addCssBlock(`<custom-style><style>${$css_4}</style></custom-style>`);
+import $css_5 from 'Frontend/styles/general-styles.css';
+addCssBlock(`<custom-style><style>${$css_5}</style></custom-style>`);
 
 import '@polymer/iron-icon/iron-icon.js';
 import '@polymer/iron-list/iron-list.js';

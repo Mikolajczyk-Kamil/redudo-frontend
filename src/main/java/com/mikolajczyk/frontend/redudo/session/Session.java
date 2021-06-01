@@ -32,11 +32,6 @@ public class Session {
         return oidcUser.getIdToken().getTokenValue();
     }
 
-    public boolean isLoggedIn() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return authentication != null;
-    }
-
     public Div getSearchHistory() {
         return searchHistory;
     }

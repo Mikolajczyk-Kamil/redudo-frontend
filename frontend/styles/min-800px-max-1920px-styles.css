@@ -1,0 +1,54 @@
+@media only screen and (min-width: 801px) and (max-width: 1920px){
+
+    .row {
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+    }
+
+    .twoItemsContainer {
+        width: 33.33%;
+        display: flex;
+        align-items: flex-end;
+    }
+
+    .item {
+        padding: 1%;
+        margin: 1%;
+        width: 46%;
+    }
+
+    .singleItemContainer {
+        width: 33.33%;
+        margin: 1%;
+        display: flex;
+    }
+
+    .singleItem {
+        cursor: pointer;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .singleItem img {
+        border-radius: 10px 10px 10px 10px;
+        max-width: 50%;
+    }
+
+    .singleItem .itemData {
+        background-color: rgba(255, 255, 255, 0.4);
+        border-radius: 10px 10px 10px 10px;
+        margin-top: 10px;
+    }
+
+    .item:hover .itemData, .singleItem:hover .itemData {
+        background-color: rgba(0, 0, 0, 0.4);
+        color: white;
+    }
+
+    .darkMode .item:hover , .darkMode .singleItem .itemData:hover {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+}

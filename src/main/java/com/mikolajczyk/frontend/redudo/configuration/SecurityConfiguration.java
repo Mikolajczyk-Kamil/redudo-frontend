@@ -25,8 +25,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests().requestMatchers(SecurityConfiguration::isFrameworkInternalRequest).permitAll()
                 .and().authorizeRequests().anyRequest().authenticated()
                 .and().csrf().disable()
-                .logout().logoutUrl(LOGOUT_URL).logoutSuccessUrl(SUCCESS_URL)
-                .and().oauth2Login().loginPage(LOGIN_URL).permitAll();
+                .logout().logoutUrl(LOGOUT_URL).logoutSuccessUrl(LOGIN_URL)
+                .and().oauth2Login().loginPage(LOGIN_URL).defaultSuccessUrl(SUCCESS_URL).permitAll();
     }
 
     @Override
@@ -36,7 +36,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 "/frontend/**",
                 "/favicon.ico",
                 "/manifest.webmanifest", "/sw.js", "/offline-page.html",
-                "/icons/**", "/images/**");
+                "/src/webapp/icons/**", "/images/**");
     }
 
     static boolean isFrameworkInternalRequest(HttpServletRequest request) {

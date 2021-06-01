@@ -13,6 +13,7 @@ import com.vaadin.flow.component.textfield.TextField;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -56,7 +57,7 @@ public class PagesContentManager {
             mainPage.add(session.getSearchHistory());
         else {
             Div infoDiv = new Div();
-            infoDiv.setText("Search books by field above.");
+            infoDiv.setText("Search books by field above");
             infoDiv.setClassName("infoDivMainPage");
             mainPage.add(infoDiv);
         }

@@ -1,9 +1,15 @@
-.loginDiv {
-    padding: 10vh;
-    border-radius: 6px;
-    box-shadow: 2px 2px 5px;
-    backdrop-filter: blur(5px);
+body {
     display: flex;
     justify-content: center;
+}
+
+.loginDiv {
+    display: flex;
+    height: 90%;
     align-items: center;
+}
+
+.loginDiv a {
+    color: white;
+    text-decoration: none;
 }
