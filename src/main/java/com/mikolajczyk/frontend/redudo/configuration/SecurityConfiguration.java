@@ -17,7 +17,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private static final String LOGIN_URL = "/login";
     private static final String LOGOUT_URL = "/logout";
-    private static final String SUCCESS_URL = "/";
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -26,7 +25,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and().authorizeRequests().anyRequest().authenticated()
                 .and().csrf().disable()
                 .logout().logoutUrl(LOGOUT_URL).logoutSuccessUrl(LOGIN_URL)
-                .and().oauth2Login().loginPage(LOGIN_URL).defaultSuccessUrl(SUCCESS_URL).permitAll();
+                .and().oauth2Login().loginPage(LOGIN_URL).permitAll();
     }
 
     @Override
@@ -35,8 +34,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 "/VAADIN/**",
                 "/frontend/**",
                 "/favicon.ico",
-                "/manifest.webmanifest", "/sw.js", "/offline-page.html",
-                "/src/webapp/icons/**", "/images/**");
+                "/manifest.webmanifest", "/sw.js", "/offline.html",
+                "/src/webapp/icons/**", "/icons/**", "/images/**");
     }
 
     static boolean isFrameworkInternalRequest(HttpServletRequest request) {

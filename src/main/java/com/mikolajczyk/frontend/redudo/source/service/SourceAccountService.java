@@ -67,14 +67,11 @@ public class SourceAccountService {
         try {
             HttpResponse<String> httpResponse = engine.addBookToListRequest(listType.getStringType(listType), bookDto);
             Long response = Long.parseLong(httpResponse.getBody());
-            if (response > 0) {
-                new Notification("Added!", 3000, Notification.Position.TOP_CENTER).open();
-                return response;
-            }
+            new Notification("Done!", 3000, Notification.Position.TOP_CENTER).open();
+            return response;
         } catch (UnirestException e) {
             e.printStackTrace();
         }
-        new Notification("It's our fault. Try again later...", 3000, Notification.Position.TOP_CENTER).open();
         return 0L;
     }
 
@@ -82,14 +79,11 @@ public class SourceAccountService {
         try {
             HttpResponse<String> httpResponse = engine.removeBookFromListRequest(listType.getStringType(listType), googleId);
             Long response = Long.parseLong(httpResponse.getBody());
-            if (response > 0) {
-                new Notification("Success!", 3000, Notification.Position.TOP_CENTER).open();
-                return response;
-            }
+            new Notification("Success!", 3000, Notification.Position.TOP_CENTER).open();
+            return response;
         } catch (UnirestException e) {
             e.printStackTrace();
         }
-        new Notification("It's our fault. Try again later...", 3000, Notification.Position.TOP_CENTER).open();
         return 0L;
     }
 }

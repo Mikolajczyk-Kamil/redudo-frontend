@@ -1,5 +1,6 @@
 package com.mikolajczyk.frontend.redudo.session;
 
+import com.mikolajczyk.frontend.redudo.domain.Book;
 import com.mikolajczyk.frontend.redudo.domain.User;
 import com.vaadin.flow.component.html.Div;
 import org.springframework.security.core.Authentication;
@@ -13,6 +14,8 @@ import org.springframework.web.context.annotation.SessionScope;
 public class Session {
 
     private Div searchHistory;
+    private Book book;
+    private boolean darkMode = false;
 
     public User getUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -38,5 +41,21 @@ public class Session {
 
     public void setSearchHistory(Div searchHistory) {
         this.searchHistory = searchHistory;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
+    public boolean isDarkMode() {
+        return darkMode;
+    }
+
+    public void setDarkMode(boolean darkMode) {
+        this.darkMode = darkMode;
     }
 }

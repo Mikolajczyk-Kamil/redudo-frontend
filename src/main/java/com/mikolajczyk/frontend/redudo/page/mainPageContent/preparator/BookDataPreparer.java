@@ -11,6 +11,8 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Paragraph;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.component.textfield.TextArea;
@@ -21,13 +23,20 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class BookDialogPreparer {
+public class BookDataPreparer {
 
     private final Session session;
     private final SourceBookService sourceBookService;
     private final RatingMapper ratingMapper;
 
-    public Div prepareDialog(Book book) {
+    public Button prepareBackButton() {
+        Button backButton = new Button(new Icon(VaadinIcon.CHEVRON_LEFT));
+        backButton.addClickListener(e -> backButton.getUI().ifPresent(ui -> ui.navigate("")));
+        backButton.setClassName("backButton");
+        return backButton;
+    }
+
+    public Div prepareTop(Book book) {
         Image image = new Image(book.getCoverUrl(), "Cover");
         image.setClassName("bookImage");
 
@@ -37,16 +46,27 @@ public class BookDialogPreparer {
         Paragraph title = new Paragraph(book.getTitle());
         title.setClassName("bookTitle");
 
+        Div bookData = new Div(author, title);
+        bookData.setClassName("bookData");
+
+        Div pageTop = new Div(image, bookData);
+        pageTop.setClassName("pageTop");
+        return pageTop;
+    }
+
+    public Div prepareDescription(Book book) {
         Paragraph description = new Paragraph("There is no description");
         description.setClassName("bookDescription");
+
         if (book.getDescription() != null && book.getDescription().length() > 0)
             description.setText(book.getDescription());
 
-        Div bookData = new Div(author, title);
-        bookData.setClassName("bookData");
-        Div pageTop = new Div(image, bookData);
-        pageTop.setClassName("pageTop");
+        Div descriptionDiv = new Div(description);
+        descriptionDiv.setClassName("bookDescriptionDiv");
+        return descriptionDiv;
+    }
 
+    public Div preparePageBottom(Book book) {
         NumberField numberField = new NumberField();
         numberField.setClassName("valueField");
         numberField.setValue(6d);
@@ -83,9 +103,6 @@ public class BookDialogPreparer {
                 new Notification("You have not write comment yet!", 3000, Notification.Position.TOP_CENTER).open();
         });
 
-        Div descriptionDiv = new Div(description);
-        descriptionDiv.setClassName("bookDescriptionDiv");
-
         Div pageBottom = new Div(numberField, inputComment, buttonAddComment, commentsContainer);
         pageBottom.setClassName("pageBottom");
 
@@ -103,10 +120,7 @@ public class BookDialogPreparer {
         } catch (UnirestException e) {
             e.printStackTrace();
         }
-
-        Div box = new Div(pageTop, descriptionDiv, pageBottom);
-        box.setClassName("bookBox");
-        return box;
+        return pageBottom;
     }
 
     public Div prepareItem(Rating rating) {

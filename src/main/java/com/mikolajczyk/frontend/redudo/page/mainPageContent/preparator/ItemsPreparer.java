@@ -1,15 +1,11 @@
 package com.mikolajczyk.frontend.redudo.page.mainPageContent.preparator;
 
 import com.mikolajczyk.frontend.redudo.domain.Book;
-import com.mikolajczyk.frontend.redudo.domain.Rating;
-import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.dialog.Dialog;
+import com.mikolajczyk.frontend.redudo.session.Session;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Header;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Paragraph;
-import com.vaadin.flow.component.icon.Icon;
-import com.vaadin.flow.component.icon.VaadinIcon;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +17,7 @@ import java.util.List;
 public class ItemsPreparer {
 
     private final ContextMenuPreparer contextMenuPreparer;
-    private final BookDialogPreparer bookDialogPreparer;
+    private final Session session;
 
     public List<Div> prepareItems(List<Book> bookList, ContextMenuType contextMenuType) {
         List<Div> itemsLists = new ArrayList<>();
@@ -86,7 +82,9 @@ public class ItemsPreparer {
         author.setClassName("itemAuthor");
         Div itemData = new Div(author, title);
         itemData.setClassName("itemData");
-        Div item = new Div(image, itemData);
+        Div itemImageBox = new Div(image);
+        itemImageBox.setClassName("itemImageBox");
+        Div item = new Div(itemImageBox, itemData);
         item.setClassName("item");
         if (contextMenuType.equals(ContextMenuType.MAIN))
             contextMenuPreparer.prepareMainContextMenu(item, book);
@@ -97,13 +95,8 @@ public class ItemsPreparer {
         else if (contextMenuType.equals(ContextMenuType.DONE))
             contextMenuPreparer.prepareDoneContextMenu(item, book);
         item.addClickListener(e -> {
-            Dialog dialog = new Dialog();
-            Div box = bookDialogPreparer.prepareDialog(book);
-            Button closeDialog = new Button(new Icon(VaadinIcon.CHEVRON_LEFT));
-            closeDialog.addClickListener(c -> dialog.close());
-            closeDialog.setClassName("closeDialogButton");
-            dialog.add(closeDialog, box);
-            dialog.open();
+            session.setBook(book);
+            item.getUI().ifPresent(ui -> ui.navigate("book"));
         });
         return item;
     }

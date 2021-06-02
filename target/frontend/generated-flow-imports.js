@@ -13,12 +13,10 @@ import $css_1 from 'Frontend/styles/book-page-styles.css';
 addCssBlock(`<custom-style><style>${$css_1}</style></custom-style>`);
 import $css_2 from 'Frontend/styles/max-800px-styles.css';
 addCssBlock(`<custom-style><style>${$css_2}</style></custom-style>`);
-import $css_3 from 'Frontend/styles/min-800px-max-1920px-styles.css';
+import $css_3 from 'Frontend/styles/min-801px-styles.css';
 addCssBlock(`<custom-style><style>${$css_3}</style></custom-style>`);
-import $css_4 from 'Frontend/styles/min-1921px-styles.css';
+import $css_4 from 'Frontend/styles/general-styles.css';
 addCssBlock(`<custom-style><style>${$css_4}</style></custom-style>`);
-import $css_5 from 'Frontend/styles/general-styles.css';
-addCssBlock(`<custom-style><style>${$css_5}</style></custom-style>`);
 
 import '@polymer/iron-icon/iron-icon.js';
 import '@polymer/iron-list/iron-list.js';

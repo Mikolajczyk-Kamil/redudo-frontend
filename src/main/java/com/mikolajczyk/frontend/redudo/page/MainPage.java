@@ -8,11 +8,9 @@ import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.html.*;
-import com.vaadin.flow.component.page.Meta;
 import com.vaadin.flow.component.page.Viewport;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
@@ -25,11 +23,7 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.PWA;
 import com.vaadin.flow.server.VaadinSession;
 import com.vaadin.flow.server.WebBrowser;
-import com.vaadin.flow.theme.NoTheme;
-import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
-import com.vaadin.flow.theme.lumo.LumoThemeDefinition;
-import com.vaadin.flow.theme.material.Material;
 
 import javax.annotation.PostConstruct;
 import java.util.HashMap;
@@ -38,14 +32,10 @@ import java.util.Map;
 @Route("")
 @PageTitle("Redudo")
 @Viewport("width=device-width, initial-scale=1.0")
-@Meta(name = "mobile-web-app-capable", content = "yes")
-@Meta(name = "apple-mobile-web-app-capable", content = "yes")
-@Meta(name = "apple-mobile-web-app-status-bar-style", content = "black-translucent")
-@PWA(name = "Redudo", shortName = "Redudo")
+@PWA(name = "Redudo book manager", shortName = "Redudo")
 @CssImport(value = "./styles/book-page-styles.css")
 @CssImport(value = "./styles/max-800px-styles.css")
-@CssImport(value = "./styles/min-800px-max-1920px-styles.css")
-@CssImport(value = "./styles/min-1921px-styles.css")
+@CssImport(value = "./styles/min-801px-styles.css")
 @CssImport(value = "./styles/general-styles.css")
 @JsModule("./scripts/script.js")
 @PreserveOnRefresh
@@ -90,12 +80,6 @@ public class MainPage extends AppLayout {
         DrawerToggle drawerToggle = new DrawerToggle();
         Div drawerContainer = new Div();
         drawerContainer.setClassName("drawer");
-        drawerToggle.addClickListener(e -> {
-            if (isDrawerOpened())
-                drawerContainer.getClassNames().remove("hide");
-            else
-                drawerContainer.addClassName("hide");
-        });
         Button themeSwitch = new Button("Dark mode");
         themeSwitch.setClassName("themeSwitchButton");
         themeSwitch.addClickListener(e -> {
@@ -104,12 +88,14 @@ public class MainPage extends AppLayout {
                 themeSwitch.setText("Dark mode");
                 drawerContainer.removeClassName("darkMode");
                 pagesInContainer.removeClassName("darkMode");
+                session.setDarkMode(false);
                 themeList.remove(Lumo.DARK);
             }
             else {
                 themeSwitch.setText("Light mode");
                 drawerContainer.addClassName("darkMode");
                 pagesInContainer.addClassName("darkMode");
+                session.setDarkMode(true);
                 themeList.add(Lumo.DARK);
             }
         });
