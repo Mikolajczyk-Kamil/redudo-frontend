@@ -1,21 +1,64 @@
 @media only screen and (max-width: 800px) {
 
-    .twoItemsContainer {
-        width: 100%;
+    .myDrawer {
+        display: none;
+    }
+
+    .drawer {
+        height: 100%;
         display: flex;
-        flex-direction: row;
-        align-items: stretch;
+        flex-direction: column;
+        padding-top: 60px;
     }
 
-    .singleItemContainer {
-        border-radius: 10px 10px 10px 10px;
+    .customNavbar {
+        background-color: white;
+        position: fixed;
+        top: 5px;
+        border-radius: 5px;
+        z-index: 2;
+        left: 1%;
+        right: 1%;
     }
 
-    .singleItem {
-        padding: 2%;
+    .searchField {
+        width: 100%;
     }
 
-    .singleItem img {
-        border-radius: 10px;
+    .contentLayout {
+        padding-top: 60px;
+    }
+
+    .item {
+        background: white;
+        background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+    }
+
+    .itemImage {
+        max-width: 70%;
+    }
+
+    .infoDiv {
+        height: 60vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .infoDiv p {
+        text-align: center;
+        background-color: rgba(255, 255, 255, 0.3);
+        padding: 10px;
+        border-radius: 30px;
+        animation-name: infoDivAnimation;
+        animation-duration: 4s;
+        animation-delay: 1s;
+        animation-iteration-count: infinite;
+    }
+
+    @keyframes infoDivAnimation {
+        0% {margin-top: 0}
+        20% {margin-top: -30vh; border-radius: 25px; padding: 15px}
+        100% {margin-top: 0}
     }
 }

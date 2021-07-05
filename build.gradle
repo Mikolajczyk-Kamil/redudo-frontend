@@ -7,7 +7,7 @@ plugins {
 
 group = 'com.mikolajczyk.frontend'
 version = '0.2'
-sourceCompatibility = '8'
+sourceCompatibility = '11'
 
 repositories {
     mavenCentral()

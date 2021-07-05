@@ -1,0 +1,172 @@
+* {
+    top: 0;
+    margin: 0;
+}
+
+body {
+    background: linear-gradient(264deg, #40a36e, #405fcf);
+    background-size: 400% 400%;
+
+    -webkit-animation: backgroundAnimation 58s ease infinite;
+    -moz-animation: backgroundAnimation 58s ease infinite;
+    -o-animation: backgroundAnimation 58s ease infinite;
+    animation: backgroundAnimation 58s ease infinite;
+    color: #243b53;
+}
+
+@-webkit-keyframes backgroundAnimation {
+    0%{background-position:0% 71%}
+    50%{background-position:100% 30%}
+    100%{background-position:0% 71%}
+}
+@-moz-keyframes backgroundAnimation {
+    0%{background-position:0% 71%}
+    50%{background-position:100% 30%}
+    100%{background-position:0% 71%}
+}
+@-o-keyframes backgroundAnimation {
+    0%{background-position:0% 71%}
+    50%{background-position:100% 30%}
+    100%{background-position:0% 71%}
+}
+@keyframes backgroundAnimation {
+    0%{background-position:0% 71%}
+    50%{background-position:100% 30%}
+    100%{background-position:0% 71%}
+}
+
+.itemDeleted {
+    display: none;
+}
+
+.drawer {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.menuTop {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.menuTop img {
+    width: 25%;
+    margin-right: 10%;
+    border-radius: 45%;
+}
+
+.menuFooter {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    font-size: 12px;
+}
+
+.themeSwitchButton {
+    border-radius: 15px;
+    margin: 5px;
+}
+
+.contentBox, .contentBox * {
+    transition: 0.4s;
+}
+
+.customNavbar {
+    display: flex;
+    flex-direction: row;
+    padding: 2px;
+    box-shadow: 4px 7px 17px -6px rgba(0,0,0,0.82);
+}
+
+.customNavbar:not(.darkMode) {
+    background: white;
+    background: linear-gradient(to right bottom, white, rgba(255, 255, 255, 0.8));
+    backdrop-filter: blur(100rem);
+}
+
+.page {
+    padding-top: 30px;
+}
+
+.searchField {
+    margin-right: 5px;
+    border-radius: 15px;
+}
+
+.item {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    margin: 5px;
+    width: 95%;
+    backdrop-filter: blur(100rem);
+    border-radius: 15px;
+}
+
+.item:not(.darkMode) {
+    box-shadow: 7px 7px 17px -9px rgba(0,0,0,0.82);
+}
+
+.itemImage {
+    max-height: 200px;
+    border-radius: 10px;
+}
+
+.itemData {
+    padding: 10px;
+}
+
+.itemAuthor {
+    font-weight: lighter;
+}
+
+.itemTitle {
+    font-size: large;
+}
+
+.contentBox.darkMode .customNavbar {
+    background: black;
+    background: linear-gradient(to right bottom, rgba(18, 18, 18, 1), rgba(18, 18, 18, 0.9));
+}
+
+.darkMode .item, .contentBox.darkMode .infoDiv p, .darkMode:not(.pages, .contentBox) {
+    background: black;
+    background: linear-gradient(to right bottom, rgba(18, 18, 18, 0.7), rgba(18, 18, 18, 0.4));
+}
+
+.darkMode, .darkMode * {
+    color: rgba(255, 255, 255, 0.80);
+}
+
+.pages {
+    overflow-y: scroll;
+    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+    scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    border-radius: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3));
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #888;
+}

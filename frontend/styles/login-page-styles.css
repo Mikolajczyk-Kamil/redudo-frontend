@@ -1,15 +1,149 @@
-body {
-    display: flex;
-    justify-content: center;
+* {
+    transition: 0.4s;
 }
 
-.loginDiv {
-    display: flex;
-    height: 90%;
-    align-items: center;
+@media only screen and (max-width: 800px) {
+    body {
+        display: flex;
+        justify-content: center;
+    }
+
+    .mainDiv {
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+    }
+
+    .loginHorizontalLayout {
+        background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.3));
+        backdrop-filter: blur(100rem);
+        width: 95vw;
+        height: 60px;
+        border-radius: 15px;
+        margin-top: 20px;
+    }
+
+    .loginLeftPanel {
+        background-color: #405fcf;
+        width: 40px;
+        height: 40px;
+        margin-top: 10px;
+        margin-left: 5vw;
+    }
+
+    .loginRightPanel {
+        background-color: rgba(200, 200, 200, 0.6);
+        width: 100%;
+        margin-left: 1%;
+        margin-right: 1%;
+        height: 36px;
+        margin-top: 12px;
+    }
+
+    .blurredDiv {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(255, 255, 255, 0);
+        backdrop-filter: blur(5px);
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+        z-index: 1;
+    }
+
+    .loginButtonDiv {
+        background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.3));
+        padding: 20px;
+        border-radius: 15px;
+        backdrop-filter: blur(5px);
+    }
+
+    .loginButtonDiv a {
+        font-size: x-large;
+        color: #243b53;
+        text-decoration: none;
+        transition: 0.5s;
+    }
+
+    .loginButtonDiv a:hover {
+        font-size: xx-large;
+        transition: 0.5s;
+    }
 }
 
-.loginDiv a {
-    color: white;
-    text-decoration: none;
+@media only screen and (min-width: 801px) {
+
+    body {
+        display: flex;
+        justify-content: center;
+    }
+
+    .mainDiv {
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .loginHorizontalLayout {
+        background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.3));
+        backdrop-filter: blur(100rem);
+        width: 70vw;
+        height: 90vh;
+        border-radius: 15px;
+    }
+
+    .loginLeftPanel {
+        background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.3));
+        width: 25vw;
+        height: 90vh;
+        margin-left: 16px;
+        border-radius: 15px;
+    }
+
+    .loginRightPanel {
+        width: 75vw;
+        height: 90vh;
+    }
+
+    .blurredDiv {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(255, 255, 255, 0);
+        backdrop-filter: blur(5px);
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+        z-index: 1;
+    }
+
+    .loginButtonDiv {
+        background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.3));
+        padding: 20px;
+        border-radius: 15px;
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+    }
+
+    .loginButtonDiv a {
+        font-size: x-large;
+        color: #243b53;
+        text-decoration: none;
+    }
+
+    .loginButtonDiv a:hover {
+        font-size: xx-large;
+        transition: 0.5s;
+    }
 }

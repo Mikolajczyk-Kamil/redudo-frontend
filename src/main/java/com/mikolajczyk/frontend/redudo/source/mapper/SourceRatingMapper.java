@@ -28,7 +28,7 @@ public class SourceRatingMapper {
                 ratingList.add(mapToRating(jsonArray.getJSONObject(i)));
             return ratingList;
         }
-        return List.of();
+        return new ArrayList<>();
     }
 
     public Rating mapToRating(JSONObject jsonBook) {

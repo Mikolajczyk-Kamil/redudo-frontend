@@ -1,82 +1,92 @@
-.bookContentBox {
-    background-color: rgba(255, 255, 255, 0.4);
-    padding: 5%;
-    border-radius: 10px;
-}
+@media only screen and (min-width: 1px) {
 
-.backButton {
-    background-color: transparent;
-}
+    .mainDiv {
+        overflow: scroll;
+        scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+        scrollbar-width: thin;
+    }
 
-.bookData {
-    padding: 10px;
-}
+    .bookContentBox {
+        background-color: rgba(255, 255, 255, 0.3);
+        border-radius: 15px;
+        padding: 30px;
+    }
 
-.bookAuthor {
-    font-weight: initial;
-    font-style: italic;
-}
+    .backButton {
+        background-color: transparent;
+        padding: 1%;
+        font-size: 20px;
+        margin-bottom: 5%;
+    }
 
-.bookTitle {
-    font-weight: bold;
-}
+    .pageTop {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
 
-.bookDescriptionDiv {
-    border-radius: 10px;
-    padding: 10px;
-    margin: 10px;
-}
+    .bookData {
+        padding: 5%;
+    }
 
-.pageTop {
-    padding: 10px;
-    margin: 10px;
-    display: flex;
-    flex-direction: row;
-}
+    .bookImage {
+        max-width: 50%;
+        border-radius: 10px;
+    }
 
-.pageBottom {
-    background-color: rgba(255,255,255, 0.1);
-    border-radius: 10px;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-}
+    .bookAuthor {
+        font-weight: lighter;
+    }
 
-.commentContainer {
-    padding: 10px;
-    background-color: rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-}
+    .bookTitle {
+        font-size: x-large;
+    }
 
-.bookImage {
-    border-radius: 10px;
-    width: 50%;
-}
+    .bookDescriptionDiv {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        font-weight: lighter;
+        font-size: large;
+    }
 
-.commentImage {
-    border-radius: 50%;
-    max-width: 50px;
-}
+    .pageBottom {
+        background: linear-gradient(to right bottom, rgba(255,255,255, 0.4), rgba(255,255,255, 0.1));
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 2%;
+        border-radius: 15px;
+    }
 
-.commentBox {
-    display: flex;
-    flex-direction: column;
-}
+    .commentContainer {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        padding: 2%;
+        font-weight: lighter;
+    }
 
-.commentTop {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 10px;
-}
+    .commentImage {
 
-.commentName {
-    padding-left: 5px;
-    padding-right: 4px;
-}
+    }
 
-.commentBottom {
-    background-color: rgba(0, 0, 0, 0.1);
-    padding: 10px;
-    border-radius: 5px;
+    .commentBox {
+
+    }
+
+    .commentTop {
+
+    }
+
+    .commentName {
+
+    }
+
+    .commentBottom {
+
+    }
 }

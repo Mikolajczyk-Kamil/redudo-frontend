@@ -23,7 +23,7 @@ public class SourceBookMapper {
                 return bookList;
             }
         }
-        return List.of();
+        return new ArrayList<>();
 }
 
     public Book mapToBook(JSONObject jsonBook) {

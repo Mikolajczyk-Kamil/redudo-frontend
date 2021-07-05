@@ -8,7 +8,10 @@ import com.mikolajczyk.frontend.redudo.session.Session;
 import com.mikolajczyk.frontend.redudo.source.service.ListType;
 import com.mikolajczyk.frontend.redudo.source.service.SourceAccountService;
 import com.mikolajczyk.frontend.redudo.source.service.SourceBookService;
+import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.Paragraph;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -28,17 +31,12 @@ public class PagesContentManager {
     public void mainSearchField(TextField searchField, Div pageMain) {
         try {
             List<Book> result = sourceBookService.getBooksByQ(searchField.getValue(), false);
-
-            Div itemContainer = new Div();
-            itemContainer.setClassName("itemContainer");
-
-            List<Div> rows = itemsPreparer.prepareItems(result, ContextMenuType.MAIN);
-            for (Div row : rows)
-                itemContainer.add(row);
-
             pageMain.removeAll();
-            pageMain.add(itemContainer);
-            session.setSearchHistory(itemContainer);
+            VerticalLayout verticalLayout = new VerticalLayout();
+            verticalLayout.setClassName("itemsLayout");
+            verticalLayout = itemsPreparer.prepareItems(result, ContextMenuType.MAIN);
+            pageMain.add(verticalLayout);
+            session.setSearchHistory(verticalLayout);
         } catch (UnirestException unirestException) {
             unirestException.printStackTrace();
         }
@@ -57,8 +55,8 @@ public class PagesContentManager {
             mainPage.add(session.getSearchHistory());
         else {
             Div infoDiv = new Div();
-            infoDiv.setText("Search books by field above");
-            infoDiv.setClassName("infoDivMainPage");
+            infoDiv.setClassName("infoDiv");
+            infoDiv.add(new Paragraph("Search books by field above"));
             mainPage.add(infoDiv);
         }
     }
@@ -74,9 +72,10 @@ public class PagesContentManager {
         List<Book> bookList = sourceAccountService.getBooksFromList(ListType.TO_READ);
         if (bookList != null && bookList.size() > 0) {
             pageToRead.removeAll();
-            List<Div> rows = itemsPreparer.prepareItems(bookList, ContextMenuType.TO_READ);
-            for (Div row : rows)
-                pageToRead.add(row);
+            VerticalLayout verticalLayout = new VerticalLayout();
+            verticalLayout.setClassName("itemsLayout");
+            verticalLayout = itemsPreparer.prepareItems(bookList, ContextMenuType.MAIN);
+            pageToRead.add(verticalLayout);
         } else
             pageToRead.setText("You have not books you wanna read...");
     }
@@ -92,9 +91,10 @@ public class PagesContentManager {
         List<Book> bookList = sourceAccountService.getBooksFromList(ListType.DURING);
         if (bookList != null && bookList.size() > 0) {
             pageDuring.removeAll();
-            List<Div> rows = itemsPreparer.prepareItems(bookList, ContextMenuType.DURING);
-            for (Div row : rows)
-                pageDuring.add(row);
+            VerticalLayout verticalLayout = new VerticalLayout();
+            verticalLayout.setClassName("itemsLayout");
+            verticalLayout = itemsPreparer.prepareItems(bookList, ContextMenuType.MAIN);
+            pageDuring.add(verticalLayout);
         } else
             pageDuring.setText("You do not read any book...");
     }
@@ -110,9 +110,10 @@ public class PagesContentManager {
         List<Book> bookList = sourceAccountService.getBooksFromList(ListType.DONE);
         if (bookList != null && bookList.size() > 0) {
             pageDone.removeAll();
-            List<Div> rows = itemsPreparer.prepareItems(bookList, ContextMenuType.DONE);
-            for (Div row : rows)
-                pageDone.add(row);
+            VerticalLayout verticalLayout = new VerticalLayout();
+            verticalLayout.setClassName("itemsLayout");
+            verticalLayout = itemsPreparer.prepareItems(bookList, ContextMenuType.MAIN);
+            pageDone.add(verticalLayout);
         } else
             pageDone.setText("You have not done any book yet...");
     }

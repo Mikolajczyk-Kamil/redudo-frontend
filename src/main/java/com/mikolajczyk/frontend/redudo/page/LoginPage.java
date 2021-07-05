@@ -4,7 +4,10 @@ import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.Header;
 import com.vaadin.flow.component.html.Paragraph;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,12 +30,29 @@ class LoginPage extends AppLayout {
             Paragraph paragraph = new Paragraph("Error in server configuration. Please contact to us.");
             setContent(paragraph);
         } else {
-            Div div = new Div();
-            div.setClassName("loginDiv");
+            Div mainDiv = new Div();
+            mainDiv.setClassName("mainDiv");
+            HorizontalLayout horizontalLayout = new HorizontalLayout();
+            horizontalLayout.setClassName("loginHorizontalLayout");
+            Div leftPanel = new Div();
+            leftPanel.setClassName("loginLeftPanel");
+            Div rightPanel = new Div();
+            rightPanel.setClassName("loginRightPanel");
+
+            Div loginButtonDiv = new Div();
+            loginButtonDiv.setClassName("loginButtonDiv");
             Anchor loginButton = new Anchor(GOOGLE_URL, "Login with Google");
             loginButton.setClassName("loginButton");
-            div.add(loginButton);
-            setContent(div);
+            loginButtonDiv.add(loginButton);
+
+            rightPanel.add(loginButtonDiv);
+            horizontalLayout.add(leftPanel, rightPanel);
+            Paragraph paragraph = new Paragraph("Redudo™");
+            Div blurredDiv = new Div(loginButtonDiv, paragraph);
+            blurredDiv.setClassName("blurredDiv");
+            mainDiv.add(blurredDiv, horizontalLayout);
+
+            setContent(mainDiv);
         }
     }
 }
