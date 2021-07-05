@@ -29,7 +29,7 @@ Project is created with:
 Setup
 ---
 To run project you have to set environment variables necessary for OAuth2 authorization:
-* CLIENT_ID (same as for the frontend app)
+* CLIENT_ID
 * CLIENT_SECRET
 
 To get it you have to create app in [Google Developer Console](https://console.cloud.google.com/apis/credentials "Google Developer Console")
