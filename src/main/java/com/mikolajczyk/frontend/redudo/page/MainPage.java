@@ -1,7 +1,9 @@
 package com.mikolajczyk.frontend.redudo.page;
 
 import com.mikolajczyk.frontend.redudo.page.mainPageContent.PagesContentManager;
+import com.mikolajczyk.frontend.redudo.page.mainPageContent.preparator.ContextMenuType;
 import com.mikolajczyk.frontend.redudo.session.Session;
+import com.mikolajczyk.frontend.redudo.source.service.ListType;
 import com.mikolajczyk.frontend.redudo.source.service.SourceAccountService;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.UI;
@@ -13,7 +15,6 @@ import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.page.Page;
 import com.vaadin.flow.component.page.Viewport;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
@@ -50,6 +51,8 @@ public class MainPage extends AppLayout {
     private Button themeSwitch;
     private ThemeList themeList;
     private Div drawerContainer;
+    private int windowWidth;
+    private int menuQuantity = 4;
 
     public MainPage(Session session, SourceAccountService sourceAccountService, PagesContentManager contentManager) {
         this.session = session;
@@ -59,41 +62,48 @@ public class MainPage extends AppLayout {
 
     @PostConstruct
     public void init() {
-        if (!session.isSignedIn()) {
+        if (!session.isSignedIn() && session.isProductionMode())
             sourceAccountService.singIn();
-        }
         session.setSignedIn(true);
+
+        prepareMenu();
         closeDrawer();
-        addToDrawer(prepareMenu());
         VerticalLayout contentLayout = prepareContent();
         prepareTabsToPages(pagesInContainer);
-        Div circle1 = new Div();
-        circle1.setClassName("circle1");
-        Div circle2 = new Div();
-        circle2.setClassName("circle2");
+
         contentBox = new Div();
         contentBox.setClassName("contentBox");
         menuDiv = new Div();
         menuDiv.setClassName("myDrawer");
-        drawerContainer = prepareMenu();
-        menuDiv.add(drawerContainer);
+
         HorizontalLayout horizontalLayout = new HorizontalLayout();
         horizontalLayout.setClassName("horizontalLayout");
         horizontalLayout.add(menuDiv, contentLayout);
-        contentBox.add(horizontalLayout, circle1, circle2);
-        setContent(contentBox);
 
         themeList = UI.getCurrent().getElement().getThemeList();
         if (session.isDarkMode())
             setDarkMode();
+
+        UI.getCurrent().getPage().retrieveExtendedClientDetails(details -> {
+            windowWidth = details.getWindowInnerWidth();
+            changeDrawerPlace();
+        });
+        UI.getCurrent().getPage().addBrowserWindowResizeListener(e -> {
+            windowWidth = e.getWidth();
+            changeDrawerPlace();
+        });
+
+        contentBox.add(horizontalLayout);
+        setContent(contentBox);
     }
 
-    public Div prepareMenu() {
+    public void prepareMenu() {
         Image userImage = new Image(session.getUser().getPictureUrl(), "Redudo");
         Header userName = new Header();
         Div menuTop = new Div(userImage, userName);
         menuTop.setClassName("menuTop");
         userName.setText(session.getUser().getName());
+
         Tab menuMain = new Tab("Main");
         Tab menuToRead = new Tab("I want to read");
         Tab menuDuring = new Tab("I am reading");
@@ -103,27 +113,28 @@ public class MainPage extends AppLayout {
         Tab menuSignOut = new Tab(anchor);
         tabs = new Tabs(menuMain, menuToRead, menuDuring, menuDone, menuSignOut);
         tabs.setOrientation(Tabs.Orientation.VERTICAL);
+
         DrawerToggle drawerToggle = new DrawerToggle();
         drawerToggle.setClassName("vaadinDrawer");
-        Div drawerContainer = new Div();
+        drawerContainer = new Div();
         drawerContainer.setClassName("drawer");
+
         themeSwitch = new Button("Dark mode");
         themeSwitch.setClassName("themeSwitchButton");
         themeSwitch.addClickListener(e -> {
-            if (themeList.contains(Lumo.DARK))
-                session.setDarkMode(false);
-            else
-                session.setDarkMode(true);
+            session.setDarkMode(!themeList.contains(Lumo.DARK));
             setDarkMode();
         });
+
         Paragraph paragraph = new Paragraph("Redudo™");
         paragraph.setClassName("menuFooterParagraph");
+
         Div menuFooter = new Div(paragraph, themeSwitch);
         menuFooter.setClassName("menuFooter");
+
         drawerContainer.add(menuTop, tabs, menuFooter);
         customNavbar = new Div(drawerToggle, prepareSearchField());
         customNavbar.setClassName("customNavbar");
-        return drawerContainer;
     }
 
     private TextField prepareSearchField() {
@@ -139,8 +150,8 @@ public class MainPage extends AppLayout {
         searchField.addValueChangeListener(e -> {
             if (
                     tabs.getSelectedTab().equals(tabs.getComponentAt(1)) ||
-                    tabs.getSelectedTab().equals(tabs.getComponentAt(2)) ||
-                    tabs.getSelectedTab().equals(tabs.getComponentAt(3))
+                            tabs.getSelectedTab().equals(tabs.getComponentAt(2)) ||
+                            tabs.getSelectedTab().equals(tabs.getComponentAt(3))
             )
                 filter(searchField.getValue());
         });
@@ -156,34 +167,31 @@ public class MainPage extends AppLayout {
         Div pageToRead = contentManager.prepareToReadPage();
         Div pageDuring = contentManager.prepareDuringPage();
         Div pageDone = contentManager.prepareDonePage();
-        Div pages = new Div(pageMain, pageToRead, pageDuring, pageDone);
-        pages.setClassName("pages");
-        pages.setSizeFull();
-        pagesInContainer = pages;
+        pagesInContainer = new Div(pageMain, pageToRead, pageDuring, pageDone);
+        pagesInContainer.setClassName("pages");
+        pagesInContainer.setSizeFull();
+
         VerticalLayout contentLayout = new VerticalLayout();
         contentLayout.setClassName("contentLayout");
-        menuDiv = new Div();
-        menuDiv.setClassName("myDrawer");
-        menuDiv.add(prepareMenu());
-        contentLayout.add(customNavbar, pages);
+        contentLayout.add(customNavbar, pagesInContainer);
         return contentLayout;
     }
 
 
     public Map<Tab, Div> prepareTabsToPages(Div pages) {
         Map<Tab, Div> tabsToPages = new HashMap<>();
-        int menuQuantity = 4;
         for (int i = 0; i < menuQuantity; i++)
             tabsToPages.put((Tab) tabs.getComponentAt(i), (Div) pages.getComponentAt(i));
+
         tabs.addSelectedChangeListener(e -> {
             tabsToPages.values().forEach(p -> p.setVisible(false));
             tabsToPages.get(tabs.getSelectedTab()).setVisible(true);
             if (tabs.getSelectedTab().equals(tabs.getComponentAt(1)))
-                contentManager.loadToReadPage((Div) pages.getComponentAt(1));
+                contentManager.loadThePage((Div) pages.getComponentAt(1), ListType.TO_READ, ContextMenuType.TO_READ, "You have not added any book yet...");
             else if (tabs.getSelectedTab().equals(tabs.getComponentAt(2)))
-                contentManager.loadDuringPage((Div) pages.getComponentAt(2));
+                contentManager.loadThePage((Div) pages.getComponentAt(2), ListType.DURING, ContextMenuType.DURING, "You were not reading any book now...");
             else if (tabs.getSelectedTab().equals(tabs.getComponentAt(3)))
-                contentManager.loadDonePage((Div) pages.getComponentAt(3));
+                contentManager.loadThePage((Div) pages.getComponentAt(3), ListType.DONE, ContextMenuType.DONE, "You have not done any book yet...");
         });
         return tabsToPages;
     }
@@ -208,9 +216,15 @@ public class MainPage extends AppLayout {
         }
     }
 
+    public void changeDrawerPlace() {
+        if (windowWidth > 800)
+            menuDiv.add(drawerContainer);
+        else
+            addToDrawer(drawerContainer);
+    }
+
     public void closeDrawer() {
         setDrawerOpened(false);
-        Page page = UI.getCurrent().getPage();
-        page.addBrowserWindowResizeListener(e -> setDrawerOpened(false));
+        UI.getCurrent().getPage().addBrowserWindowResizeListener(e -> setDrawerOpened(false));
     }
 }

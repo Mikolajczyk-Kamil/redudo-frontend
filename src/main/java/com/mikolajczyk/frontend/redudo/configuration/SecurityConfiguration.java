@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    private static final String LOGIN_URL = "/login";
+    private static final String LOGIN_URL = "/";
     private static final String LOGOUT_URL = "/logout";
 
     @Override

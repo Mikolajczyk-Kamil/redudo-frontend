@@ -16,25 +16,32 @@ public class Session {
 
     private VerticalLayout searchHistory;
     private Book book;
+    private boolean productionMode = false;
     private boolean darkMode = false;
     private boolean signedIn = false;
 
     public User getUser() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        OidcUser oidcUser = (OidcUser) authentication.getPrincipal();
-        return new User(
-                oidcUser.getAttribute("subject"),
-                oidcUser.getAttribute("given_name"),
-                oidcUser.getAttribute("family_name"),
-                oidcUser.getAttribute("email"),
-                oidcUser.getAttribute("picture")
-        );
+        if (productionMode) {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            OidcUser oidcUser = (OidcUser) authentication.getPrincipal();
+            return new User(
+                    oidcUser.getAttribute("subject"),
+                    oidcUser.getAttribute("given_name"),
+                    oidcUser.getAttribute("family_name"),
+                    oidcUser.getAttribute("email"),
+                    oidcUser.getAttribute("picture")
+            );
+        }
+        return new User("", "Name", "", "", "");
     }
 
     public String getToken() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        OidcUser oidcUser = (OidcUser) authentication.getPrincipal();
-        return oidcUser.getIdToken().getTokenValue();
+        if (productionMode){
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            OidcUser oidcUser = (OidcUser) authentication.getPrincipal();
+            return oidcUser.getIdToken().getTokenValue();
+        }
+        return "";
     }
 
     public VerticalLayout getSearchHistory() {
@@ -67,5 +74,9 @@ public class Session {
 
     public void setSignedIn(boolean signedIn) {
         this.signedIn = signedIn;
+    }
+
+    public boolean isProductionMode() {
+        return productionMode;
     }
 }

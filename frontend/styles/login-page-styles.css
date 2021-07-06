@@ -17,29 +17,16 @@
     }
 
     .loginHorizontalLayout {
-        background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.3));
-        backdrop-filter: blur(100rem);
-        width: 95vw;
-        height: 60px;
+        background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.3));
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        width: 95%;
         border-radius: 15px;
-        margin-top: 20px;
     }
 
     .loginLeftPanel {
-        background-color: #405fcf;
-        width: 40px;
-        height: 40px;
-        margin-top: 10px;
-        margin-left: 5vw;
-    }
-
-    .loginRightPanel {
-        background-color: rgba(200, 200, 200, 0.6);
-        width: 100%;
-        margin-left: 1%;
-        margin-right: 1%;
-        height: 36px;
-        margin-top: 12px;
+        margin-left: 20px;
     }
 
     .blurredDiv {
@@ -49,7 +36,7 @@
         width: 100vw;
         height: 100vh;
         background: rgba(255, 255, 255, 0);
-        backdrop-filter: blur(5px);
+        backdrop-filter: blur(2px);
         display: flex;
         flex-direction: column-reverse;
         justify-content: center;
@@ -94,7 +81,6 @@
 
     .loginHorizontalLayout {
         background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.3));
-        backdrop-filter: blur(100rem);
         width: 70vw;
         height: 90vh;
         border-radius: 15px;
@@ -108,9 +94,19 @@
         border-radius: 15px;
     }
 
+    .loginDrawerToggle {
+        display: none;
+    }
+
     .loginRightPanel {
-        width: 75vw;
-        height: 90vh;
+        width: 73vw;
+        height: 7vh;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.2);
+        margin: 1vw;
+        border-radius: 15px;
     }
 
     .blurredDiv {
@@ -120,7 +116,7 @@
         width: 100vw;
         height: 100vh;
         background: rgba(255, 255, 255, 0);
-        backdrop-filter: blur(5px);
+        backdrop-filter: blur(3px);
         display: flex;
         flex-direction: column-reverse;
         justify-content: center;
