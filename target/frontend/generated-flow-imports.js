@@ -9,13 +9,13 @@ function addCssBlock(block) {
 }
 import $css_0 from 'Frontend/styles/book-page-styles.css';
 addCssBlock(`<custom-style><style>${$css_0}</style></custom-style>`);
-import $css_1 from 'Frontend/styles/login-page-styles.css';
+import $css_1 from 'Frontend/styles/max-800px-styles.css';
 addCssBlock(`<custom-style><style>${$css_1}</style></custom-style>`);
-import $css_2 from 'Frontend/styles/max-800px-styles.css';
+import $css_2 from 'Frontend/styles/min-801px-styles.css';
 addCssBlock(`<custom-style><style>${$css_2}</style></custom-style>`);
-import $css_3 from 'Frontend/styles/min-801px-styles.css';
+import $css_3 from 'Frontend/styles/main-styles.css';
 addCssBlock(`<custom-style><style>${$css_3}</style></custom-style>`);
-import $css_4 from 'Frontend/styles/main-styles.css';
+import $css_4 from 'Frontend/styles/login-page-styles.css';
 addCssBlock(`<custom-style><style>${$css_4}</style></custom-style>`);
 
 import '@polymer/iron-icon/iron-icon.js';

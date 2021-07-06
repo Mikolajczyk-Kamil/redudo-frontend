@@ -1,11 +1,11 @@
-* {
-    transition: 0.4s;
-}
-
 @media only screen and (max-width: 800px) {
     body {
         display: flex;
         justify-content: center;
+    }
+
+    .mainDiv * {
+        transition: 0.4s;
     }
 
     .mainDiv {
