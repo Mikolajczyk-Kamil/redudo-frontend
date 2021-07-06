@@ -1,7 +1,13 @@
-Redudo
+Redudo 
 ===
 
 #### Frontend of `Redudo` book manager. There is [backend](https://github.com/Mikolajczyk-Kamil/redudo-backend "Backend").
+
+Preview
+---
+[redudo.heroku.com](https://redudo.herokuapp.com "Redudo")
+
+Server's wake up can take about minute
 
 Table of Contents
 ---
