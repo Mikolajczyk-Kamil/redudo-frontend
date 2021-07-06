@@ -1,92 +1,69 @@
-@media only screen and (min-width: 1px) {
+.mainDiv {
+    overflow: scroll;
+    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+    scrollbar-width: thin;
+}
 
-    .mainDiv {
-        overflow: scroll;
-        scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
-        scrollbar-width: thin;
-    }
+.bookContentBox {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+    padding: 30px;
+}
 
-    .bookContentBox {
-        background-color: rgba(255, 255, 255, 0.3);
-        border-radius: 15px;
-        padding: 30px;
-    }
+.backButton {
+    background-color: transparent;
+    padding: 1%;
+    font-size: 20px;
+    margin-bottom: 5%;
+}
 
-    .backButton {
-        background-color: transparent;
-        padding: 1%;
-        font-size: 20px;
-        margin-bottom: 5%;
-    }
+.pageTop {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
 
-    .pageTop {
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-    }
+.bookData {
+    padding: 5%;
+}
 
-    .bookData {
-        padding: 5%;
-    }
+.bookImage {
+    max-width: 50%;
+    border-radius: 10px;
+}
 
-    .bookImage {
-        max-width: 50%;
-        border-radius: 10px;
-    }
+.bookAuthor {
+    font-weight: lighter;
+}
 
-    .bookAuthor {
-        font-weight: lighter;
-    }
+.bookTitle {
+    font-size: x-large;
+}
 
-    .bookTitle {
-        font-size: x-large;
-    }
+.bookDescriptionDiv {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-weight: lighter;
+    font-size: large;
+}
 
-    .bookDescriptionDiv {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        text-align: center;
-        font-weight: lighter;
-        font-size: large;
-    }
+.pageBottom {
+    background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1));
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2%;
+    border-radius: 15px;
+}
 
-    .pageBottom {
-        background: linear-gradient(to right bottom, rgba(255,255,255, 0.4), rgba(255,255,255, 0.1));
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding: 2%;
-        border-radius: 15px;
-    }
-
-    .commentContainer {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        padding: 2%;
-        font-weight: lighter;
-    }
-
-    .commentImage {
-
-    }
-
-    .commentBox {
-
-    }
-
-    .commentTop {
-
-    }
-
-    .commentName {
-
-    }
-
-    .commentBottom {
-
-    }
+.commentContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 2%;
+    font-weight: lighter;
 }

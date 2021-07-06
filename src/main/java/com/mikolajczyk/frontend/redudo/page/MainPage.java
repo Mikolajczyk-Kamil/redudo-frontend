@@ -43,6 +43,7 @@ public class MainPage extends AppLayout {
     private final Session session;
     private final SourceAccountService sourceAccountService;
     private final PagesContentManager contentManager;
+    private final int menuQuantity = 4;
     private Div pagesInContainer;
     private Div customNavbar;
     private Div contentBox;
@@ -52,7 +53,6 @@ public class MainPage extends AppLayout {
     private ThemeList themeList;
     private Div drawerContainer;
     private int windowWidth;
-    private int menuQuantity = 4;
 
     public MainPage(Session session, SourceAccountService sourceAccountService, PagesContentManager contentManager) {
         this.session = session;

@@ -15,19 +15,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Route("book")
 public class BookPage extends AppLayout implements HasDynamicTitle {
 
-    private Book book;
+    private final Book book;
 
     @Autowired
     public BookPage(Session session, BookDataPreparer bookDataPreparer) {
         this.book = session.getBook();
+
         Button backButton = bookDataPreparer.prepareBackButton();
         Div pageTop = bookDataPreparer.prepareTop(book);
         Div description = bookDataPreparer.prepareDescription(book);
         Div pageBottom = bookDataPreparer.preparePageBottom(book);
+
         VerticalLayout bookContentBox = new VerticalLayout(backButton, pageTop, description, pageBottom);
         bookContentBox.setClassName("bookContentBox");
+
         if (session.isDarkMode())
             bookContentBox.getClassNames().add("darkMode");
+
         Div mainDiv = new Div(bookContentBox);
         mainDiv.setClassName("mainDiv");
         setContent(mainDiv);

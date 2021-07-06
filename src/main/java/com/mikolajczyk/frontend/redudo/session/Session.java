@@ -2,7 +2,6 @@ package com.mikolajczyk.frontend.redudo.session;
 
 import com.mikolajczyk.frontend.redudo.domain.Book;
 import com.mikolajczyk.frontend.redudo.domain.User;
-import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,7 +15,7 @@ public class Session {
 
     private VerticalLayout searchHistory;
     private Book book;
-    private boolean productionMode = false;
+    private final boolean productionMode = true;
     private boolean darkMode = false;
     private boolean signedIn = false;
 
